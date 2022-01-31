@@ -17,7 +17,8 @@ const changeModalState = (state) => {
                 switch(item.nodeName) {
                     case 'SPAN' :
                         state[prop] = i;
-                        break
+                        
+                        break;
                     case 'INPUT' :
                         if (item.getAttribute('type') === 'checkbox') {
                             i === 0 ? state[prop] = 'Холодное' : state[prop] = 'Теплое';
@@ -27,8 +28,23 @@ const changeModalState = (state) => {
                                     box.checked = true;
                                 }
                             })
+                            let btn = document.querySelector('.popup_calc_profile_button');                            
+                            if (!state['type']) {
+                                state['type'] = 'tree'
+                            }
+                            btn.removeAttribute('disabled');     
                         } else {
+                            if (!state['form']) {
+                                state['form'] = 1
+                            }
                             state[prop] = item.value;
+                            let btn = document.querySelector('.popup_calc_button');
+                            if (state['width'] && state['height']) {
+                                btn.removeAttribute('disabled');                                
+                            }
+                            // } else {
+                            //     btn.setAttribute('disabled', true);
+                            // }
                         }
                         break;
                     case 'SELECT' :
